@@ -90,9 +90,10 @@ function handleSwitchChange(index: number, value: boolean, tag: ParsedTag) {
 }
 
 // 选择器改变事件
-function handleSelectChange(index: number, value: string, tag: ParsedTag) {
+function handleSelectChange(index: number, value: string, _tag: ParsedTag) {
   selectStates.value[index] = value
   const message = `选择了: ${value}`
+  void _tag // 保留参数以便将来扩展
   
   ElMessage({
     message,
@@ -105,8 +106,9 @@ function handleSelectChange(index: number, value: string, tag: ParsedTag) {
 
 // 输入框输入事件（防抖）
 let inputTimer: ReturnType<typeof setTimeout> | null = null
-function handleInputChange(index: number, value: string, tag: ParsedTag) {
+function handleInputChange(index: number, value: string, _tag: ParsedTag) {
   inputStates.value[index] = value
+  void _tag // 保留参数以便将来扩展
   
   if (inputTimer) clearTimeout(inputTimer)
   inputTimer = setTimeout(() => {
